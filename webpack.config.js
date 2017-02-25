@@ -8,7 +8,7 @@ module.exports = {
         root: __dirname,
         // specify our components path
         alias: {
-
+            Main: 'app/components/Main.jsx'
         },
         extensions: ['','.js', '.jsx']
     },
