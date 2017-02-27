@@ -6,7 +6,7 @@ module.exports = {
     },
     resolve: {
         root: __dirname,
-        // specify our components path
+        // Specify our components path
         alias: {
             Main: 'app/components/Main.jsx',
             Nav: 'app/components/Nav.jsx',
