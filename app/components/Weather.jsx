@@ -12,11 +12,17 @@ var Weather = React.createClass({
     },
     // Parent function, proper naming convention according to onSearch
     handleSearch: function (location) {
-      //   this.setState({
-      //    location: location,
-      //     temp: 23
-      // });
+      // this gets lost inside the Promise, therefore we create a that var
+        var that = this;
 
+        openWeatherMap.getTemp(location).then(function (temp) {
+        that.setState({
+            location: location,
+            temp: temp
+        });
+      }, function (errorMessage){
+          alert(errorMessage);
+      });
     },
 
    render: function () {

@@ -10,11 +10,13 @@ module.exports = {
         var encodedLocation = encodeURIComponent(location);
         var requestURL = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
 
-        axios.get(requestURL).then(function (res) {
+        // axios uses JS Promises
+        return axios.get(requestURL).then(function (res) {
+
             if(res.data.cod && res.data.message){
                 throw new Error(res.data.message);
             } else {
-                return res.data.main.temp:
+                return res.data.main.temp;
             }
         }, function (res) {
             throw new Error(res.data.message);
