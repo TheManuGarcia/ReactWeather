@@ -11,10 +11,11 @@ var Weather = React.createClass({
     },
     // Parent function, proper naming convention according to onSearch
     handleSearch: function (location) {
-        this.setState({
-         location: location,
-          temp: 23
-      });
+      //   this.setState({
+      //    location: location,
+      //     temp: 23
+      // });
+
     },
 
    render: function () {
