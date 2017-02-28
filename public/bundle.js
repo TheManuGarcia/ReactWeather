@@ -25215,21 +25215,41 @@
 	var WeatherMessage = __webpack_require__(220);
 
 	var Weather = React.createClass({
-	   displayName: 'Weather',
+	    displayName: 'Weather',
 
-	   render: function render() {
-	      return React.createElement(
-	         'div',
-	         null,
-	         React.createElement(
-	            'h3',
+	    getInitialState: function getInitialState() {
+	        return {
+	            location: 'Miami',
+	            temp: 88
+	        };
+	    },
+	    // Parent function, proper naming convention according to onSearch
+	    handleSearch: function handleSearch(location) {
+	        this.setState({
+	            location: location,
+	            temp: 23
+	        });
+	    },
+
+	    render: function render() {
+	        // Pulling both variables off of the State
+	        var _state = this.state,
+	            temp = _state.temp,
+	            location = _state.location;
+
+
+	        return React.createElement(
+	            'div',
 	            null,
-	            'Weather Component'
-	         ),
-	         React.createElement(WeatherForm, null),
-	         React.createElement(WeatherMessage, null)
-	      );
-	   }
+	            React.createElement(
+	                'h3',
+	                null,
+	                'Weather Component'
+	            ),
+	            React.createElement(WeatherForm, { onSearch: this.handleSearch }),
+	            React.createElement(WeatherMessage, { temp: temp, location: location })
+	        );
+	    }
 	});
 
 	module.exports = Weather;
@@ -25245,14 +25265,29 @@
 	var WeatherForm = React.createClass({
 	    displayName: "WeatherForm",
 
+
+	    onFormSubmit: function onFormSubmit(e) {
+	        e.preventDefault();
+
+	        // Pulls the value of the location
+	        var location = this.refs.location.value;
+
+	        if (location.length > 0) {
+	            this.refs.location.value = "";
+
+	            // Calls parent function inside of Weather.jsx
+	            this.props.onSearch(location);
+	        }
+	    },
+
 	    render: function render() {
 	        return React.createElement(
 	            "div",
 	            null,
 	            React.createElement(
 	                "form",
-	                null,
-	                React.createElement("input", { type: "text" }),
+	                { onSubmit: this.onFormSubmit },
+	                React.createElement("input", { type: "text", ref: "location" }),
 	                React.createElement(
 	                    "button",
 	                    null,
@@ -25274,15 +25309,22 @@
 	var React = __webpack_require__(1);
 
 	var WeatherMessage = React.createClass({
-	  displayName: 'WeatherMessage',
+	    displayName: 'WeatherMessage',
 
-	  render: function render() {
-	    return React.createElement(
-	      'h3',
-	      null,
-	      'It\'s 40 in Philly'
-	    );
-	  }
+	    render: function render() {
+	        var _props = this.props,
+	            temp = _props.temp,
+	            location = _props.location;
+
+	        return React.createElement(
+	            'h3',
+	            null,
+	            'It\'s ',
+	            temp,
+	            ' in ',
+	            location
+	        );
+	    }
 
 	});
 
