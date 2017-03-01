@@ -13,8 +13,10 @@ module.exports = {
         // axios uses JS Promises
         return axios.get(requestURL).then(function (res) {
 
+            // Check if cod and message (err) exist
             if(res.data.cod && res.data.message){
                 throw new Error(res.data.message);
+
             } else {
                 return res.data.main.temp;
             }
@@ -22,5 +24,7 @@ module.exports = {
             throw new Error(res.data.message);
 
         });
+
     }
+
 }
