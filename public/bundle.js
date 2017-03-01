@@ -25220,8 +25220,7 @@
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            location: 'Miami',
-	            temp: 88
+	            isLoading: false
 	        };
 	    },
 	    // Parent function, proper naming convention according to onSearch
@@ -25229,12 +25228,19 @@
 	        // this gets lost inside the Promise, therefore we create a that var
 	        var that = this;
 
+	        // When someone starts a search we set isLoading to true
+	        this.setState({ isLoading: true });
+	        // If things go well...
 	        openWeatherMap.getTemp(location).then(function (temp) {
 	            that.setState({
 	                location: location,
-	                temp: temp
+	                temp: temp,
+	                // When data is fetched
+	                isLoading: false
 	            });
+	            // If things go poorly...
 	        }, function (errorMessage) {
+	            that.setState({ isLoading: false });
 	            alert(errorMessage);
 	        });
 	    },
@@ -25242,9 +25248,23 @@
 	    render: function render() {
 	        // Pulling both variables off of the State
 	        var _state = this.state,
+	            isLoading = _state.isLoading,
 	            temp = _state.temp,
 	            location = _state.location;
 
+
+	        function renderMessage() {
+	            if (isLoading) {
+	                return React.createElement(
+	                    'h3',
+	                    null,
+	                    'Fetching weather...'
+	                );
+	            } else if (temp && location) {
+	                {/*Passing the variables as props*/}
+	                return React.createElement(WeatherMessage, { temp: temp, location: location });
+	            }
+	        }
 
 	        return React.createElement(
 	            'div',
@@ -25255,7 +25275,7 @@
 	                'Weather Component'
 	            ),
 	            React.createElement(WeatherForm, { onSearch: this.handleSearch }),
-	            React.createElement(WeatherMessage, { temp: temp, location: location })
+	            renderMessage()
 	        );
 	    }
 	});
@@ -25360,12 +25380,12 @@
 
 	            // Check if cod and message (err) exist
 	            if (res.data.cod && res.data.message) {
-	                throw new Error(res.data.message);
+	                throw new Error(res.response.data.message);
 	            } else {
 	                return res.data.main.temp;
 	            }
 	        }, function (res) {
-	            throw new Error(res.data.message);
+	            throw new Error(res.response.data.message);
 	        });
 	    }
 

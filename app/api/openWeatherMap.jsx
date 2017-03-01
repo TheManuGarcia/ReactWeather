@@ -15,13 +15,13 @@ module.exports = {
 
             // Check if cod and message (err) exist
             if(res.data.cod && res.data.message){
-                throw new Error(res.data.message);
+                throw new Error(res.response.data.message);
 
             } else {
                 return res.data.main.temp;
             }
         }, function (res) {
-            throw new Error(res.data.message);
+            throw new Error(res.response.data.message);
 
         });
 

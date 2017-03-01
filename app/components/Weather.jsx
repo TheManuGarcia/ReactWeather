@@ -6,8 +6,7 @@ var openWeatherMap = require('openWeatherMap');
 var Weather = React.createClass({
     getInitialState: function(){
         return{
-            location:'Miami',
-            temp: 88
+            isLoading: false
         }
     },
     // Parent function, proper naming convention according to onSearch
@@ -15,26 +14,43 @@ var Weather = React.createClass({
       // this gets lost inside the Promise, therefore we create a that var
         var that = this;
 
+       // When someone starts a search we set isLoading to true
+        this.setState({isLoading: true});
+        // If things go well...
         openWeatherMap.getTemp(location).then(function (temp) {
         that.setState({
             location: location,
-            temp: temp
+            temp: temp,
+            // When data is fetched
+            isLoading: false
         });
+        // If things go poorly...
       }, function (errorMessage){
-          alert(errorMessage);
+            that.setState({isLoading: false});
+            alert(errorMessage);
       });
     },
 
    render: function () {
         // Pulling both variables off of the State
-        var{temp, location} = this.state;
+        var{isLoading, temp, location} = this.state;
+
+        function renderMessage() {
+            if (isLoading){
+               return <h3>Fetching weather...</h3>;
+            } else if(temp && location){
+                {/*Passing the variables as props*/}
+                return  <WeatherMessage temp={temp} location={location}/>;
+            }
+
+        }
 
        return(
          <div>
             <h3>Weather Component</h3>
             <WeatherForm onSearch={this.handleSearch}/>
-           {/*Passing the variables as props*/}
-             <WeatherMessage temp={temp} location={location}/>
+            {renderMessage()}
+
          </div>
        );
 
