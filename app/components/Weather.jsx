@@ -14,6 +14,8 @@ var Weather = React.createClass({
       // this gets lost inside the Promise, therefore we create a that var
         var that = this;
 
+        debugger;
+
        // When someone starts a search we set isLoading to true
         this.setState({isLoading: true});
         // If things go well...
