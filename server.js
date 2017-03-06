@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 const PORT = process.env.PORT || 3000;
 
+// Redirects https traffic to http (API is free and only supports http)
 app.use(function(req, res, next){
    if (req.headers['x-forwarded-proto']==='http'){
     next();
