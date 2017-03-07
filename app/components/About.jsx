@@ -8,10 +8,10 @@ var About = (props) => {
           <p>Technologies used:</p>
           <ul>
               <li>
-                  <a href="https://facebook.github.io/react">React</a> - JavaScript framework.
+                  <a href="https://facebook.github.io/react" target="_blank">React</a> - JavaScript framework.
               </li>
               <li>
-                  <a href="http://openweathermap.org">Open Weather Map</a> - API used to search weather data.
+                  <a href="http://openweathermap.org" target="_blank">Open Weather Map</a> - API used to search weather data.
               </li>
           </ul>
       </div>
