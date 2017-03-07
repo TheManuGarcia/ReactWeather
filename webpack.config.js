@@ -1,5 +1,26 @@
+
+var webpack = require('webpack');
+
 module.exports = {
-    entry: './app/app.jsx',
+    // We load jQuery and Foundation before our app.js || We use script loader npm module (script!) since jquery and foundation are script files.
+    entry: [
+        'script!jquery/dist/jquery.min.js',
+        'script!foundation-sites/dist/foundation.min.js',
+        './app/app.jsx'
+    ],
+    // We provide a set of key/value pairs. key = module name, value = variable name we want available
+    externals: {
+        jquery: 'jQuery',
+
+    },
+
+    plugins: [
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
+    ],
+
     output: {
         path: __dirname,
         filename: './public/bundle.js'
