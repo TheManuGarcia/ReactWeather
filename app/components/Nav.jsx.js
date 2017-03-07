@@ -23,10 +23,10 @@ var Nav = React.createClass({
                        <li>
                            <Link to="/examples" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Examples</Link>
                        </li>
-
                    </ul>
                </div>
                <div className="top-bar-right">
+
                    <form onSubmit={this.onSearch}>
                        <ul className="menu">
                            <li>
