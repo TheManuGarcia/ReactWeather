@@ -2,6 +2,7 @@ var React = require('react');
 var {Link, IndexLink} = require('react-router');
 
 
+// Switched from the stateless functional component back to the React.createClass component definition. (Before Nav =>)
 var Nav = React.createClass({
    onSearch: function(e){
      e.preventDefault();
