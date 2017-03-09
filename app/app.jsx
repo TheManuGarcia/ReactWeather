@@ -9,9 +9,11 @@ var About = require('About');
 var Examples = require('Examples');
 
 // :Load Foundation
-require('style!css!foundation-sites/dist/foundation.min.css')
+require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
+// Load style.css
+require('style!css!applicationStyles');
 
 ReactDOM.render(
 
