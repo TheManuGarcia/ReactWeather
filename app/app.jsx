@@ -12,8 +12,8 @@ var Examples = require('Examples');
 require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
-// Load style.css
-require('style!css!applicationStyles');
+// Load style.scss
+require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
 
