@@ -15,12 +15,12 @@ var Weather = React.createClass({
       // this gets lost inside the Promise, therefore we create a that var
         var that = this;
 
-        debugger;
-
        // When someone starts a search we set isLoading to true
         this.setState({
             isLoading: true,
-            errorMessage: undefined
+            errorMessage: undefined,
+            location: undefined,
+            temp: undefined
         });
         // If things go well...
         openWeatherMap.getTemp(location).then(function (temp) {
@@ -37,6 +37,18 @@ var Weather = React.createClass({
                 errorMessage: e.message
             });
       });
+    },
+
+    componentDidMount: function () {
+       // We pull out location in from the query object
+        var location = this.props.location.query.location;
+
+        // We start the search
+        if(location && location.length > 0) {
+            this.handleSearch(location);
+            // reset query string
+            window.location.hash = '#/';
+        }
     },
 
    render: function () {
