@@ -8,5 +8,7 @@ React Weather App built using the following technologies:
 - ReactJS
 - Open Weather API
 - Webpack
+- Foundation
+- SCSS
 
 Check out the React Weather App <a href="http://whispering-brushlands-67447.herokuapp.com/" target="_blank">here</a>
