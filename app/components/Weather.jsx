@@ -50,6 +50,20 @@ var Weather = React.createClass({
             window.location.hash = '#/';
         }
     },
+    
+    // Built-in function. Making search box working  in homepage by updating url
+    
+    componentWillReceiveProps: function (newProps) {
+        // We pull out location in from the query object
+        var location = newProps.location.query.location;
+
+        // We start the search
+        if(location && location.length > 0) {
+            this.handleSearch(location);
+            // reset query string
+            window.location.hash = '#/';
+        }
+    },
 
    render: function () {
         // Pulling both variables off of the State
