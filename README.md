@@ -6,6 +6,7 @@ React Weather App built using the following technologies:
 - ES6
 - JSX
 - ReactJS
+- jQuery
 - Open Weather API
 - Webpack
 - Foundation
