@@ -2,6 +2,7 @@
 
 <img src="https://github.com/TheManuGarcia/ReactWeather/blob/master/ScreenshotWeatherApp.png"/>
 React Weather App built using the following technologies:
+
 - JavaScript 
 - ES6
 - JSX
